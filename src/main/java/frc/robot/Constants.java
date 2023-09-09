@@ -69,7 +69,7 @@ public final class Constants {
     }
 
     public static class Ports {
-        public class Swerve {
+        public static class Swerve {
             public static final int FRONT_LEFT_TURNING_MOTOR = 0;
             public static final int FRONT_LEFT_DRIVING_MOTOR = 1;
         }

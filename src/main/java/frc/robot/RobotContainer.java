@@ -20,6 +20,11 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
+  private final FrontLeftSwerveModuleSubsystem = new FrontLeftSwerveModuleSubsystem();
+  private final FrontRightSwerveModuleSubsystem = new FrontRightSwerveModuleSubsystem();
+  private final RearLeftSwerveModuleSubsystem = new RearLeftSwerveModuleSubsystem();
+  private final RearRightSwerveModuleSubsystem = new RearRightSwerveModuleSubsystem();
+
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */

@@ -6,7 +6,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class SwerveModuleSubsystem extends SubsystemBase {
+public class SwerveModuleSubsystem {
   private final WPI_TalonFX drivingMotor;
   private final CANSparkMax steeringMotor;
   private final WPI_CANCoder steeringEncoder;
@@ -41,7 +41,6 @@ public class SwerveModuleSubsystem extends SubsystemBase {
     steeringEncoder.setPosition(0);
   }
 
-  @Override
   public void periodic() {
     steeringMotor.set(steeringController.calculate(steeringEncoder.getPosition()));
   }
