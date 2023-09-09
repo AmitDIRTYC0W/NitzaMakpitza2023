@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.util.Units;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -19,10 +22,10 @@ public final class Constants {
              * The location of each swerve module relative to the robot's centre
              */
 
-            Translation2d FRONT_LEFT = new Translation2d(-0.2975, 0.3325);
-            Translation2d FRONT_RIGHT = new Translation2d(0.2975, 0.3225);
-            Translation2d REAR_LEFT = new Translation2d(-0.2975, -0.3225);
-            Translation2d REAR_RIGHT = new Translation2d(0.2975, -0.3225);
+            public static final Translation2d FRONT_LEFT = new Translation2d(-0.2975, 0.3325);
+            public static final Translation2d FRONT_RIGHT = new Translation2d(0.2975, 0.3225);
+            public static final Translation2d REAR_LEFT = new Translation2d(-0.2975, -0.3225);
+            public static final Translation2d REAR_RIGHT = new Translation2d(0.2975, -0.3225);
         }
 
         public static final double SWERVE_WHEEL_DIAMETER = Units.inchesToMeters(4);
@@ -70,8 +73,21 @@ public final class Constants {
 
     public static class Ports {
         public static class Swerve {
-            public static final int FRONT_LEFT_TURNING_MOTOR = 0;
-            public static final int FRONT_LEFT_DRIVING_MOTOR = 1;
+            public static final int FRONT_LEFT_DRIVING_MOTOR = 0;
+            public static final int FRONT_LEFT_STEERING_MOTOR = 1;
+            public static final int FRONT_LEFT_STEERING_ENCODER = 2;
+
+            public static final int FRONT_RIGHT_DRIVING_MOTOR = 0;
+            public static final int FRONT_RIGHT_STEERING_MOTOR = 1;
+            public static final int FRONT_RIGHT_STEERING_ENCODER = 2;
+
+            public static final int REAR_LEFT_DRIVING_MOTOR = 0;
+            public static final int REAR_LEFT_STEERING_MOTOR = 1;
+            public static final int REAR_LEFT_STEERING_ENCODER = 2;
+
+            public static final int REAR_RIGHT_DRIVING_MOTOR = 0;
+            public static final int REAR_RIGHT_STEERING_MOTOR = 1;
+            public static final int REAR_RIGHT_STEERING_ENCODER = 2;
         }
     }
 }
