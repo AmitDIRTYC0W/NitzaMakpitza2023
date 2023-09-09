@@ -66,4 +66,9 @@ public class SwerveModuleSubsystem {
     double steeringMotorRotations = optimalState.angle.getRotations() / MechanicalConstants.SWERVE_STEERING_GEAR_RATIO;
     steeringController.setSetpoint(Units.rotationsToDegrees(steeringMotorRotations));
   }
+
+  public void stopMotor() {
+    drivingMotor.stopMotor();
+    steeringMotor.stopMotor();
+  }
 }

@@ -52,4 +52,11 @@ public class DrivetrainSubsystem extends SubsystemBase {
     rlModule.setState(states[2]);
     rrModule.setState(states[3]);
   }
+
+  public void stopMotor() {
+    flModule.stopMotor();
+    frModule.stopMotor();
+    rlModule.stopMotor();
+    rrModule.stopMotor();
+  }
 }
