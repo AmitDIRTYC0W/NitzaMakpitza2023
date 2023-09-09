@@ -69,6 +69,13 @@ public final class Constants {
         public static final double SWERVE_STEERING_KP = 0;
         public static final double SWERVE_STEERING_KI = 0;
         public static final double SWERVE_STEERING_KD = 0;
+
+        /**
+         * We avoid steering the swerve wheels below a certain driving speed, for in-place turning
+         * causes them to jitter. Thus, we hereby define the maximum driving speed that is
+         * considered 'in-place'.
+         */
+        public static final double SWERVE_IN_PLACE_DRIVE_MPS = 0.1;
     }
 
     public static class Ports {

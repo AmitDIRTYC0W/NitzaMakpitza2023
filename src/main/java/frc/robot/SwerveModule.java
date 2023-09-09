@@ -76,9 +76,11 @@ public class SwerveModule {
       drivingControllerFeedforward.calculate(drivingMotorFXSpeed)
     );
 
-    // TODO prevent rotation if speed is insufficient
-    double steeringMotorRotations = optimalState.angle.getRotations() / MechanicalConstants.SWERVE_STEERING_GEAR_RATIO;
-    steeringController.setSetpoint(Units.rotationsToDegrees(steeringMotorRotations));
+    // Prevent rotation if speed is insufficient to prevent jittering
+    if (optimalState.speedMetersPerSecond < ControlConstants.SWERVE_IN_PLACE_DRIVE_MPS) {
+      double steeringMotorRotations = optimalState.angle.getRotations() / MechanicalConstants.SWERVE_STEERING_GEAR_RATIO;
+      steeringController.setSetpoint(Units.rotationsToDegrees(steeringMotorRotations));      
+    }
   }
 
   public void stopMotor() {
