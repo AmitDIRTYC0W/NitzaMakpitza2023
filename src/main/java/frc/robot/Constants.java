@@ -17,30 +17,39 @@ import edu.wpi.first.math.util.Units;
  */
 public final class Constants {
     public static class MechanicalConstants {
-        public static class SwerveModuleLocationsMetres {
+        public static class SwerveMechanicalConstants {
+            public static class ModuleLocationsMetres {
+                /**
+                 * The location of each swerve module relative to the robot's centre
+                 */
+
+                public static final Translation2d FRONT_LEFT = new Translation2d(-0.2975, 0.3325);
+                public static final Translation2d FRONT_RIGHT = new Translation2d(0.2975, 0.3225);
+                public static final Translation2d REAR_LEFT = new Translation2d(-0.2975, -0.3225);
+                public static final Translation2d REAR_RIGHT = new Translation2d(0.2975, -0.3225);
+            }
+
+            public static class EncoderOffsetDegrees {
+                public static final double FRONT_LEFT = 1.56;
+                public static final double FRONT_RIGHT = 100.45;
+                public static final double REAR_LEFT = 194.23;
+                public static final double REAR_RIGHT = 293.46;
+            }
+
+            public static final double WHEEL_DIAMETER = Units.inchesToMeters(4);
+            public static final double WHEEL_CIRCUMFERENCE = SWERVE_WHEEL_DIAMETER * 2 * Math.PI;
+
             /**
-             * The location of each swerve module relative to the robot's centre
+             * The gearing-ratio between the driving motor and the driving wheel using the L2 ratio of
+             * the MK4i modules
              */
+            public static final double DRIVING_GEAR_RATIO = 6.75;
 
-            public static final Translation2d FRONT_LEFT = new Translation2d(-0.2975, 0.3325);
-            public static final Translation2d FRONT_RIGHT = new Translation2d(0.2975, 0.3225);
-            public static final Translation2d REAR_LEFT = new Translation2d(-0.2975, -0.3225);
-            public static final Translation2d REAR_RIGHT = new Translation2d(0.2975, -0.3225);
+            /**
+             * The ratio between steering motor rotation and the steering itself 
+             */
+            public static final double STEERING_GEAR_RATIO = 150 / 7;
         }
-
-        public static final double SWERVE_WHEEL_DIAMETER = Units.inchesToMeters(4);
-        public static final double SWERVE_WHEEL_CIRCUMFERENCE = SWERVE_WHEEL_DIAMETER * 2 * Math.PI;
-
-        /**
-         * The gearing-ratio between the driving motor and the driving wheel using the L2 ratio of
-         * the MK4i modules
-         */
-        public static final double SWERVE_DRIVING_GEAR_RATIO = 6.75;
-
-        /**
-         * The ratio between steering motor rotation and the steering itself 
-         */
-        public static final double SWERVE_STEERING_GEAR_RATIO = 150 / 7;
     }
 
     public static final int FALCON_SENSOR_TICKS_PER_REV = 2048;

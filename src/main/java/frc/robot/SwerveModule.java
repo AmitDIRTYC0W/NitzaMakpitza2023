@@ -23,7 +23,7 @@ import frc.robot.Constants.MechanicalConstants;
 public class SwerveModule {
   private final WPI_TalonFX drivingMotor;
   private final CANSparkMax steeringMotor;
-  private final WPI_CANCoder steeringEncoder;
+  private final RelativeEncoder steeringEncoder;
 
   private final SimpleMotorFeedforward drivingControllerFeedforward = new SimpleMotorFeedforward(
     ControlConstants.SWERVE_DRIVING_KS,
@@ -36,14 +36,19 @@ public class SwerveModule {
     ControlConstants.SWERVE_DRIVING_KD
   );
 
-  public SwerveModule(WPI_TalonFX drivingMotor, CANSparkMax steeringMotor, WPI_CANCoder steeringEncoder) {
+  public SwerveModule(
+    WPI_TalonFX drivingMotor,
+    CANSparkMax steeringMotor,
+    WPI_CANCoder absoluteSteeringEncoder,
+    double absoluteSteeringEncoderOffsetDegrees
+  ) {
     this.drivingMotor = drivingMotor;
     this.steeringMotor = steeringMotor;
-    this.steeringEncoder = steeringEncoder;
+    this.steeringEncoder = steeringMotor.getEncoder();
 
     drivingMotor.configFactoryDefault();
     steeringMotor.restoreFactoryDefaults();
-    steeringEncoder.configFactoryDefault();
+    absoluteSteeringEncoder.configFactoryDefault();
 
     SlotConfiguration drivingMotorPID = new SlotConfiguration();
     drivingMotorPID.kP = ControlConstants.SWERVE_DRIVING_KP;
@@ -52,7 +57,10 @@ public class SwerveModule {
     drivingMotorPID.kF = ControlConstants.SWERVE_DRIVING_KF;
     drivingMotor.configureSlot(drivingMotorPID);
 
-    steeringEncoder.setPosition(0);
+    // Only use absoluteSteeringEncoder to reset the relative encoder
+    steeringEncoder.setPosition(
+      absoluteSteeringEncoder.getAbsolutePosition() - absoluteSteeringEncoderOffsetDegrees
+    );
   }
 
   public void periodic() {

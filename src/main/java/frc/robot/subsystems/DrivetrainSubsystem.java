@@ -34,10 +34,30 @@ public class DrivetrainSubsystem extends SubsystemBase {
   private final CANSparkMax rrSteeringMotor = new CANSparkMax(Ports.Swerve.REAR_RIGHT_STEERING_MOTOR, MotorType.kBrushless);
   private final WPI_CANCoder rrSteeringEncoder = new WPI_CANCoder(Ports.Swerve.REAR_RIGHT_STEERING_MOTOR);
  
-  private final SwerveModule flModule = new SwerveModule(flDrivingMotor, flSteeringMotor, flSteeringEncoder);
-  private final SwerveModule frModule = new SwerveModule(frDrivingMotor, frSteeringMotor, frSteeringEncoder);
-  private final SwerveModule rlModule = new SwerveModule(rlDrivingMotor, rlSteeringMotor, rlSteeringEncoder);
-  private final SwerveModule rrModule = new SwerveModule(rrDrivingMotor, rrSteeringMotor, rrSteeringEncoder);
+  private final SwerveModule flModule = new SwerveModule(
+    flDrivingMotor,
+    flSteeringMotor,
+    flSteeringEncoder,
+    EncoderOffsetDegrees.FRONT_LEFT
+  );
+  private final SwerveModule frModule = new SwerveModule(
+    frDrivingMotor,
+    frSteeringMotor,
+    frSteeringEncoder,
+    EncoderOffsetDegrees.FRONT_RIGHT
+  );
+  private final SwerveModule rlModule = new SwerveModule(
+    rlDrivingMotor,
+    rlSteeringMotor,
+    rlSteeringEncoder,
+    EncoderOffsetDegrees.REAR_LEFT
+  );
+  private final SwerveModule rrModule = new SwerveModule(
+    rrDrivingMotor,
+    rrSteeringMotor,
+    rrSteeringEncoder,
+    EncoderOffsetDegrees.REAR_RIGHT
+  );
 
   private SwerveDriveKinematics kinematics = new SwerveDriveKinematics(
     SwerveModuleLocationsMetres.FRONT_LEFT,
