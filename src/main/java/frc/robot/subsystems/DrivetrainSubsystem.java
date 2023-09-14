@@ -15,7 +15,8 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.SwerveModule;
 import frc.robot.Constants.Ports;
-import frc.robot.Constants.MechanicalConstants.SwerveModuleLocationsMetres;
+import frc.robot.Constants.MechanicalConstants.SwerveMechanicalConstants.EncoderOffsetDegrees;
+import frc.robot.Constants.MechanicalConstants.SwerveMechanicalConstants.ModuleLocationsMetres;
 
 public class DrivetrainSubsystem extends SubsystemBase {
   private final WPI_TalonFX flDrivingMotor = new WPI_TalonFX(Ports.Swerve.FRONT_LEFT_DRIVING_MOTOR);
@@ -60,10 +61,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
   );
 
   private SwerveDriveKinematics kinematics = new SwerveDriveKinematics(
-    SwerveModuleLocationsMetres.FRONT_LEFT,
-    SwerveModuleLocationsMetres.FRONT_RIGHT,
-    SwerveModuleLocationsMetres.REAR_LEFT,
-    SwerveModuleLocationsMetres.REAR_RIGHT
+    ModuleLocationsMetres.FRONT_LEFT,
+    ModuleLocationsMetres.FRONT_RIGHT,
+    ModuleLocationsMetres.REAR_LEFT,
+    ModuleLocationsMetres.REAR_RIGHT
   );
 
   public DrivetrainSubsystem() {}

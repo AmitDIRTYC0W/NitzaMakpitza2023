@@ -37,7 +37,7 @@ public final class Constants {
             }
 
             public static final double WHEEL_DIAMETER = Units.inchesToMeters(4);
-            public static final double WHEEL_CIRCUMFERENCE = SWERVE_WHEEL_DIAMETER * 2 * Math.PI;
+            public static final double WHEEL_CIRCUMFERENCE = WHEEL_DIAMETER * 2 * Math.PI;
 
             /**
              * The gearing-ratio between the driving motor and the driving wheel using the L2 ratio of
@@ -89,21 +89,21 @@ public final class Constants {
 
     public static class Ports {
         public static class Swerve {
-            public static final int FRONT_LEFT_DRIVING_MOTOR = 0;
-            public static final int FRONT_LEFT_STEERING_MOTOR = 1;
-            public static final int FRONT_LEFT_STEERING_ENCODER = 2;
+            public static final int FRONT_LEFT_DRIVING_MOTOR = 7;
+            public static final int FRONT_LEFT_STEERING_MOTOR = 8;
+            public static final int FRONT_LEFT_STEERING_ENCODER = 9;
 
-            public static final int FRONT_RIGHT_DRIVING_MOTOR = 0;
-            public static final int FRONT_RIGHT_STEERING_MOTOR = 1;
-            public static final int FRONT_RIGHT_STEERING_ENCODER = 2;
+            public static final int FRONT_RIGHT_DRIVING_MOTOR = 1;
+            public static final int FRONT_RIGHT_STEERING_MOTOR = 2;
+            public static final int FRONT_RIGHT_STEERING_ENCODER = 3;
 
-            public static final int REAR_LEFT_DRIVING_MOTOR = 0;
-            public static final int REAR_LEFT_STEERING_MOTOR = 1;
-            public static final int REAR_LEFT_STEERING_ENCODER = 2;
+            public static final int REAR_LEFT_DRIVING_MOTOR = 10;
+            public static final int REAR_LEFT_STEERING_MOTOR = 11;
+            public static final int REAR_LEFT_STEERING_ENCODER = 12;
 
-            public static final int REAR_RIGHT_DRIVING_MOTOR = 0;
-            public static final int REAR_RIGHT_STEERING_MOTOR = 1;
-            public static final int REAR_RIGHT_STEERING_ENCODER = 2;
+            public static final int REAR_RIGHT_DRIVING_MOTOR = 4;
+            public static final int REAR_RIGHT_STEERING_MOTOR = 5;
+            public static final int REAR_RIGHT_STEERING_ENCODER = 6;
         }
     }
 }

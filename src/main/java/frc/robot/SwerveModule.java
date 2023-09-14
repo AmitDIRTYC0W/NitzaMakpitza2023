@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.can.SlotConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.WPI_CANCoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
@@ -19,6 +20,7 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ControlConstants;
 import frc.robot.Constants.MechanicalConstants;
+import frc.robot.Constants.MechanicalConstants.SwerveMechanicalConstants;
 
 public class SwerveModule {
   private final WPI_TalonFX drivingMotor;
@@ -74,8 +76,8 @@ public class SwerveModule {
       Rotation2d.fromDegrees(steeringEncoder.getPosition())
     );
 
-    double drivingWheelRPS = optimalState.speedMetersPerSecond / MechanicalConstants.SWERVE_WHEEL_CIRCUMFERENCE;
-    double drivingMotorRPS = drivingWheelRPS * MechanicalConstants.SWERVE_DRIVING_GEAR_RATIO;
+    double drivingWheelRPS = optimalState.speedMetersPerSecond / SwerveMechanicalConstants.WHEEL_CIRCUMFERENCE;
+    double drivingMotorRPS = drivingWheelRPS * SwerveMechanicalConstants.DRIVING_GEAR_RATIO;
     double drivingMotorFXSpeed = drivingMotorRPS * 10 * Constants.FALCON_SENSOR_TICKS_PER_REV;
     drivingMotor.set(
       ControlMode.Velocity,
@@ -86,7 +88,7 @@ public class SwerveModule {
 
     // Prevent rotation if speed is insufficient to prevent jittering
     if (optimalState.speedMetersPerSecond < ControlConstants.SWERVE_IN_PLACE_DRIVE_MPS) {
-      double steeringMotorRotations = optimalState.angle.getRotations() / MechanicalConstants.SWERVE_STEERING_GEAR_RATIO;
+      double steeringMotorRotations = optimalState.angle.getRotations() / SwerveMechanicalConstants.DRIVING_GEAR_RATIO;
       steeringController.setSetpoint(Units.rotationsToDegrees(steeringMotorRotations));      
     }
   }
