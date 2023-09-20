@@ -118,10 +118,23 @@ public class SwerveModule {
 
     private void configDriveMotor(){        
         mDriveMotor.configFactoryDefault();
-        mDriveMotor.configAllSettings(Robot.ctreConfigs.swerveDriveFXConfig);
         mDriveMotor.setInverted(Constants.Swerve.driveMotorInvert);
+        mDriveMotor.configAllSettings(Robot.ctreConfigs.swerveDriveFXConfig);
         mDriveMotor.setNeutralMode(Constants.Swerve.driveNeutralMode);
         mDriveMotor.setSelectedSensorPosition(0);
+    }
+
+    private void conifgInverted() {
+        switch (this.moduleNumber) {
+            case 1:
+                mDriveMotor.setInverted(!Constants.Swerve.driveMotorInvert);
+                break;
+            case 0:
+                mDriveMotor.setInverted(!Constants.Swerve.driveMotorInvert);
+                break;
+            default:
+                break;
+        }
     }
 
     public SwerveModuleState getState(){
@@ -136,5 +149,9 @@ public class SwerveModule {
             Conversions.falconToMeters(mDriveMotor.getSelectedSensorPosition(), Constants.Swerve.wheelCircumference, Constants.Swerve.driveGearRatio), 
             getAngle()
         );
+    }
+
+    public void setInverted(boolean isInverted) {
+        mAngleMotor.setInverted(isInverted);
     }
 }
