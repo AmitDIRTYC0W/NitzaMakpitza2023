@@ -12,7 +12,6 @@ import frc.lib.util.COTSFalconSwerveConstants;
 import frc.lib.util.SwerveModuleConstants;
 
 public final class Constants {
-<<<<<<< HEAD
     public static final double stickDeadband = 0.1;
 
     public static final class Swerve {
@@ -134,7 +133,6 @@ public final class Constants {
         public static boolean angleInvert = true;
         public static double voltageComp = 12.0;
         public static final double angleConversionFactor = 360.0 / angleGearRatio;
-=======
     public static class MechanicalConstants {
         public static class SwerveMechanicalConstants {
             public static class ModuleLocationsMetres {
@@ -169,7 +167,6 @@ public final class Constants {
              */
             public static final double STEERING_GEAR_RATIO = 150 / 7;
         }
->>>>>>> 38e796776471ec782b914678799b273f1171ef67
     }
 
     public static final class AutoConstants { //TODO: The below constants are used in the example auto, and must be tuned to specific robot
@@ -178,16 +175,6 @@ public final class Constants {
         public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
         public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
     
-<<<<<<< HEAD
-        public static final double kPXController = 1;
-        public static final double kPYController = 1;
-        public static final double kPThetaController = 1;
-    
-        /* Constraint for the motion profilied robot angle controller */
-        public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
-            new TrapezoidProfile.Constraints(
-                kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
-=======
         public static final double SWERVE_STEERING_KP = 0;
         public static final double SWERVE_STEERING_KI = 0;
         public static final double SWERVE_STEERING_KD = 0;
@@ -201,7 +188,7 @@ public final class Constants {
     }
 
     public static class Ports {
-        public static class Swerve {
+        public static class SwervePorts {
             public static final int FRONT_LEFT_DRIVING_MOTOR = 7;
             public static final int FRONT_LEFT_STEERING_MOTOR = 8;
             public static final int FRONT_LEFT_STEERING_ENCODER = 9;
@@ -218,6 +205,6 @@ public final class Constants {
             public static final int REAR_RIGHT_STEERING_MOTOR = 5;
             public static final int REAR_RIGHT_STEERING_ENCODER = 6;
         }
->>>>>>> 38e796776471ec782b914678799b273f1171ef67
     }
+}
 }

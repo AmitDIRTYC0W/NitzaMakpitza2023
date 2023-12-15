@@ -14,50 +14,43 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.SwerveModule;
-import frc.robot.Constants.Ports;
-import frc.robot.Constants.MechanicalConstants.SwerveMechanicalConstants.EncoderOffsetDegrees;
-import frc.robot.Constants.MechanicalConstants.SwerveMechanicalConstants.ModuleLocationsMetres;
+import frc.robot.Constants.Swerve;
+import frc.robot.Constants.Swerve.Ports.SwervePorts;
+import frc.robot.Constants.Swerve.MechanicalConstants.SwerveMechanicalConstants.EncoderOffsetDegrees;
+import frc.robot.Constants.Swerve.MechanicalConstants.SwerveMechanicalConstants.ModuleLocationsMetres;
 
 public class DrivetrainSubsystem extends SubsystemBase {
-  private final WPI_TalonFX flDrivingMotor = new WPI_TalonFX(Ports.Swerve.FRONT_LEFT_DRIVING_MOTOR);
-  private final CANSparkMax flSteeringMotor = new CANSparkMax(Ports.Swerve.FRONT_LEFT_STEERING_MOTOR, MotorType.kBrushless);
-  private final WPI_CANCoder flSteeringEncoder = new WPI_CANCoder(Ports.Swerve.FRONT_LEFT_STEERING_MOTOR);
+  private final WPI_TalonFX flDrivingMotor = new WPI_TalonFX(SwervePorts.FRONT_LEFT_DRIVING_MOTOR);
+  private final CANSparkMax flSteeringMotor = new CANSparkMax(SwervePorts.FRONT_LEFT_STEERING_MOTOR, MotorType.kBrushless);
+  private final WPI_CANCoder flSteeringEncoder = new WPI_CANCoder(SwervePorts.FRONT_LEFT_STEERING_MOTOR);
  
-  private final WPI_TalonFX frDrivingMotor = new WPI_TalonFX(Ports.Swerve.FRONT_RIGHT_DRIVING_MOTOR);
-  private final CANSparkMax frSteeringMotor = new CANSparkMax(Ports.Swerve.FRONT_RIGHT_STEERING_MOTOR, MotorType.kBrushless);
-  private final WPI_CANCoder frSteeringEncoder = new WPI_CANCoder(Ports.Swerve.FRONT_RIGHT_STEERING_MOTOR);
+  private final WPI_TalonFX frDrivingMotor = new WPI_TalonFX(SwervePorts.FRONT_RIGHT_DRIVING_MOTOR);
+  private final CANSparkMax frSteeringMotor = new CANSparkMax(SwervePorts.FRONT_RIGHT_STEERING_MOTOR, MotorType.kBrushless);
+  private final WPI_CANCoder frSteeringEncoder = new WPI_CANCoder(SwervePorts.FRONT_RIGHT_STEERING_MOTOR);
  
-  private final WPI_TalonFX rlDrivingMotor = new WPI_TalonFX(Ports.Swerve.REAR_LEFT_DRIVING_MOTOR);
-  private final CANSparkMax rlSteeringMotor = new CANSparkMax(Ports.Swerve.REAR_LEFT_STEERING_MOTOR, MotorType.kBrushless);
-  private final WPI_CANCoder rlSteeringEncoder = new WPI_CANCoder(Ports.Swerve.REAR_LEFT_STEERING_MOTOR);
+  private final WPI_TalonFX rlDrivingMotor = new WPI_TalonFX(SwervePorts.REAR_LEFT_DRIVING_MOTOR);
+  private final CANSparkMax rlSteeringMotor = new CANSparkMax(SwervePorts.REAR_LEFT_STEERING_MOTOR, MotorType.kBrushless);
+  private final WPI_CANCoder rlSteeringEncoder = new WPI_CANCoder(SwervePorts.REAR_LEFT_STEERING_MOTOR);
  
-  private final WPI_TalonFX rrDrivingMotor = new WPI_TalonFX(Ports.Swerve.REAR_RIGHT_DRIVING_MOTOR);
-  private final CANSparkMax rrSteeringMotor = new CANSparkMax(Ports.Swerve.REAR_RIGHT_STEERING_MOTOR, MotorType.kBrushless);
-  private final WPI_CANCoder rrSteeringEncoder = new WPI_CANCoder(Ports.Swerve.REAR_RIGHT_STEERING_MOTOR);
+  private final WPI_TalonFX rrDrivingMotor = new WPI_TalonFX(SwervePorts.REAR_RIGHT_DRIVING_MOTOR);
+  private final CANSparkMax rrSteeringMotor = new CANSparkMax(SwervePorts.REAR_RIGHT_STEERING_MOTOR, MotorType.kBrushless);
+  private final WPI_CANCoder rrSteeringEncoder = new WPI_CANCoder(SwervePorts.REAR_RIGHT_STEERING_MOTOR);
  
   private final SwerveModule flModule = new SwerveModule(
-    flDrivingMotor,
-    flSteeringMotor,
-    flSteeringEncoder,
-    EncoderOffsetDegrees.FRONT_LEFT
+    0,
+    Swerve.Mod0.constants
   );
   private final SwerveModule frModule = new SwerveModule(
-    frDrivingMotor,
-    frSteeringMotor,
-    frSteeringEncoder,
-    EncoderOffsetDegrees.FRONT_RIGHT
+    1,
+    Swerve.Mod1.constants
   );
   private final SwerveModule rlModule = new SwerveModule(
-    rlDrivingMotor,
-    rlSteeringMotor,
-    rlSteeringEncoder,
-    EncoderOffsetDegrees.REAR_LEFT
+    2,
+    Swerve.Mod2.constants
   );
   private final SwerveModule rrModule = new SwerveModule(
-    rrDrivingMotor,
-    rrSteeringMotor,
-    rrSteeringEncoder,
-    EncoderOffsetDegrees.REAR_RIGHT
+    3,
+    Swerve.Mod3.constants
   );
 
   private SwerveDriveKinematics kinematics = new SwerveDriveKinematics(

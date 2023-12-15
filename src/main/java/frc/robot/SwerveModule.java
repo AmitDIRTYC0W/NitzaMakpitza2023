@@ -14,35 +14,22 @@ import frc.lib.util.CANSparkMaxUtil.Usage;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
+import com.ctre.phoenix.sensors.WPI_CANCoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
-<<<<<<< HEAD
 import com.revrobotics.SparkMaxPIDController;
-import com.revrobotics.CANSparkMax.ControlType;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
-public class SwerveModule {
-    public int moduleNumber;
-    private Rotation2d angleOffset;
-    private Rotation2d lastAngle;
-=======
 
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.ControlConstants;
-import frc.robot.Constants.MechanicalConstants;
-import frc.robot.Constants.MechanicalConstants.SwerveMechanicalConstants;
+import frc.robot.Constants.Swerve;
 
 public class SwerveModule {
   private final WPI_TalonFX drivingMotor;
   private final CANSparkMax steeringMotor;
   private final RelativeEncoder steeringEncoder;
->>>>>>> 38e796776471ec782b914678799b273f1171ef67
 
     private RelativeEncoder mIntegratedAngleEncoder;
     private SparkMaxPIDController angleController;
@@ -50,17 +37,6 @@ public class SwerveModule {
     private TalonFX mDriveMotor;
     private CANCoder angleEncoder;
 
-<<<<<<< HEAD
-    SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Constants.Swerve.driveKS, Constants.Swerve.driveKV, Constants.Swerve.driveKA);
-
-    public SwerveModule(int moduleNumber, SwerveModuleConstants moduleConstants){
-        this.moduleNumber = moduleNumber;
-        this.angleOffset = moduleConstants.angleOffset;
-        
-        /* Angle Encoder Config */
-        angleEncoder = new CANCoder(moduleConstants.cancoderID);
-        configAngleEncoder();
-=======
   public SwerveModule(
     WPI_TalonFX drivingMotor,
     CANSparkMax steeringMotor,
@@ -74,21 +50,13 @@ public class SwerveModule {
     drivingMotor.configFactoryDefault();
     steeringMotor.restoreFactoryDefaults();
     absoluteSteeringEncoder.configFactoryDefault();
->>>>>>> 38e796776471ec782b914678799b273f1171ef67
 
         /* Angle Motor Config */
-        mAngleMotor = new CANSparkMax(moduleConstants.angleMotorID, MotorType.kBrushless);
+        mAngleMotor = new CANSparkMax(SwerveModule., MotorType.kBrushless);
         mIntegratedAngleEncoder = mAngleMotor.getEncoder();
         angleController = mAngleMotor.getPIDController();
         configAngleMotor();
 
-<<<<<<< HEAD
-        /* Drive Motor Config */
-        mDriveMotor = new TalonFX(moduleConstants.driveMotorID);
-        configDriveMotor();
-
-        lastAngle = getState().angle;
-=======
     // Only use absoluteSteeringEncoder to reset the relative encoder
     steeringEncoder.setPosition(
       absoluteSteeringEncoder.getAbsolutePosition() - absoluteSteeringEncoderOffsetDegrees
@@ -120,7 +88,6 @@ public class SwerveModule {
     if (optimalState.speedMetersPerSecond < ControlConstants.SWERVE_IN_PLACE_DRIVE_MPS) {
       double steeringMotorRotations = optimalState.angle.getRotations() / SwerveMechanicalConstants.DRIVING_GEAR_RATIO;
       steeringController.setSetpoint(Units.rotationsToDegrees(steeringMotorRotations));      
->>>>>>> 38e796776471ec782b914678799b273f1171ef67
     }
 
     public void setDesiredState(SwerveModuleState desiredState, boolean isOpenLoop){
