@@ -17,6 +17,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+<<<<<<< HEAD
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -25,6 +26,23 @@ public class SwerveModule {
     public int moduleNumber;
     private Rotation2d angleOffset;
     private Rotation2d lastAngle;
+=======
+
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.ControlConstants;
+import frc.robot.Constants.MechanicalConstants;
+import frc.robot.Constants.MechanicalConstants.SwerveMechanicalConstants;
+
+public class SwerveModule {
+  private final WPI_TalonFX drivingMotor;
+  private final CANSparkMax steeringMotor;
+  private final RelativeEncoder steeringEncoder;
+>>>>>>> 38e796776471ec782b914678799b273f1171ef67
 
     private RelativeEncoder mIntegratedAngleEncoder;
     private SparkMaxPIDController angleController;
@@ -32,6 +50,7 @@ public class SwerveModule {
     private TalonFX mDriveMotor;
     private CANCoder angleEncoder;
 
+<<<<<<< HEAD
     SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Constants.Swerve.driveKS, Constants.Swerve.driveKV, Constants.Swerve.driveKA);
 
     public SwerveModule(int moduleNumber, SwerveModuleConstants moduleConstants){
@@ -41,6 +60,21 @@ public class SwerveModule {
         /* Angle Encoder Config */
         angleEncoder = new CANCoder(moduleConstants.cancoderID);
         configAngleEncoder();
+=======
+  public SwerveModule(
+    WPI_TalonFX drivingMotor,
+    CANSparkMax steeringMotor,
+    WPI_CANCoder absoluteSteeringEncoder,
+    double absoluteSteeringEncoderOffsetDegrees
+  ) {
+    this.drivingMotor = drivingMotor;
+    this.steeringMotor = steeringMotor;
+    this.steeringEncoder = steeringMotor.getEncoder();
+
+    drivingMotor.configFactoryDefault();
+    steeringMotor.restoreFactoryDefaults();
+    absoluteSteeringEncoder.configFactoryDefault();
+>>>>>>> 38e796776471ec782b914678799b273f1171ef67
 
         /* Angle Motor Config */
         mAngleMotor = new CANSparkMax(moduleConstants.angleMotorID, MotorType.kBrushless);
@@ -48,11 +82,45 @@ public class SwerveModule {
         angleController = mAngleMotor.getPIDController();
         configAngleMotor();
 
+<<<<<<< HEAD
         /* Drive Motor Config */
         mDriveMotor = new TalonFX(moduleConstants.driveMotorID);
         configDriveMotor();
 
         lastAngle = getState().angle;
+=======
+    // Only use absoluteSteeringEncoder to reset the relative encoder
+    steeringEncoder.setPosition(
+      absoluteSteeringEncoder.getAbsolutePosition() - absoluteSteeringEncoderOffsetDegrees
+    );
+  }
+
+  public void periodic() {
+    steeringMotor.set(steeringController.calculate(steeringEncoder.getPosition()));
+  }
+
+  public void setState(SwerveModuleState state) {
+    // Prevent any rotation of more than 90 degrees
+    SwerveModuleState optimalState = SwerveModuleState.optimize(
+      state,
+      Rotation2d.fromDegrees(steeringEncoder.getPosition())
+    );
+
+    double drivingWheelRPS = optimalState.speedMetersPerSecond / SwerveMechanicalConstants.WHEEL_CIRCUMFERENCE;
+    double drivingMotorRPS = drivingWheelRPS * SwerveMechanicalConstants.DRIVING_GEAR_RATIO;
+    double drivingMotorFXSpeed = drivingMotorRPS * 10 * Constants.FALCON_SENSOR_TICKS_PER_REV;
+    drivingMotor.set(
+      ControlMode.Velocity,
+      drivingMotorFXSpeed,
+      DemandType.ArbitraryFeedForward,
+      drivingControllerFeedforward.calculate(drivingMotorFXSpeed)
+    );
+
+    // Prevent rotation if speed is insufficient to prevent jittering
+    if (optimalState.speedMetersPerSecond < ControlConstants.SWERVE_IN_PLACE_DRIVE_MPS) {
+      double steeringMotorRotations = optimalState.angle.getRotations() / SwerveMechanicalConstants.DRIVING_GEAR_RATIO;
+      steeringController.setSetpoint(Units.rotationsToDegrees(steeringMotorRotations));      
+>>>>>>> 38e796776471ec782b914678799b273f1171ef67
     }
 
     public void setDesiredState(SwerveModuleState desiredState, boolean isOpenLoop){

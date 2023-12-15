@@ -12,6 +12,7 @@ import frc.lib.util.COTSFalconSwerveConstants;
 import frc.lib.util.SwerveModuleConstants;
 
 public final class Constants {
+<<<<<<< HEAD
     public static final double stickDeadband = 0.1;
 
     public static final class Swerve {
@@ -133,6 +134,42 @@ public final class Constants {
         public static boolean angleInvert = true;
         public static double voltageComp = 12.0;
         public static final double angleConversionFactor = 360.0 / angleGearRatio;
+=======
+    public static class MechanicalConstants {
+        public static class SwerveMechanicalConstants {
+            public static class ModuleLocationsMetres {
+                /**
+                 * The location of each swerve module relative to the robot's centre
+                 */
+
+                public static final Translation2d FRONT_LEFT = new Translation2d(-0.2975, 0.3325);
+                public static final Translation2d FRONT_RIGHT = new Translation2d(0.2975, 0.3225);
+                public static final Translation2d REAR_LEFT = new Translation2d(-0.2975, -0.3225);
+                public static final Translation2d REAR_RIGHT = new Translation2d(0.2975, -0.3225);
+            }
+
+            public static class EncoderOffsetDegrees {
+                public static final double FRONT_LEFT = 1.56;
+                public static final double FRONT_RIGHT = 100.45;
+                public static final double REAR_LEFT = 194.23;
+                public static final double REAR_RIGHT = 293.46;
+            }
+
+            public static final double WHEEL_DIAMETER = Units.inchesToMeters(4);
+            public static final double WHEEL_CIRCUMFERENCE = WHEEL_DIAMETER * 2 * Math.PI;
+
+            /**
+             * The gearing-ratio between the driving motor and the driving wheel using the L2 ratio of
+             * the MK4i modules
+             */
+            public static final double DRIVING_GEAR_RATIO = 6.75;
+
+            /**
+             * The ratio between steering motor rotation and the steering itself 
+             */
+            public static final double STEERING_GEAR_RATIO = 150 / 7;
+        }
+>>>>>>> 38e796776471ec782b914678799b273f1171ef67
     }
 
     public static final class AutoConstants { //TODO: The below constants are used in the example auto, and must be tuned to specific robot
@@ -141,6 +178,7 @@ public final class Constants {
         public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
         public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
     
+<<<<<<< HEAD
         public static final double kPXController = 1;
         public static final double kPYController = 1;
         public static final double kPThetaController = 1;
@@ -149,5 +187,37 @@ public final class Constants {
         public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
             new TrapezoidProfile.Constraints(
                 kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
+=======
+        public static final double SWERVE_STEERING_KP = 0;
+        public static final double SWERVE_STEERING_KI = 0;
+        public static final double SWERVE_STEERING_KD = 0;
+
+        /**
+         * We avoid steering the swerve wheels below a certain driving speed, for in-place turning
+         * causes them to jitter. Thus, we hereby define the maximum driving speed that is
+         * considered 'in-place'.
+         */
+        public static final double SWERVE_IN_PLACE_DRIVE_MPS = 0.1;
+    }
+
+    public static class Ports {
+        public static class Swerve {
+            public static final int FRONT_LEFT_DRIVING_MOTOR = 7;
+            public static final int FRONT_LEFT_STEERING_MOTOR = 8;
+            public static final int FRONT_LEFT_STEERING_ENCODER = 9;
+
+            public static final int FRONT_RIGHT_DRIVING_MOTOR = 1;
+            public static final int FRONT_RIGHT_STEERING_MOTOR = 2;
+            public static final int FRONT_RIGHT_STEERING_ENCODER = 3;
+
+            public static final int REAR_LEFT_DRIVING_MOTOR = 10;
+            public static final int REAR_LEFT_STEERING_MOTOR = 11;
+            public static final int REAR_LEFT_STEERING_ENCODER = 12;
+
+            public static final int REAR_RIGHT_DRIVING_MOTOR = 4;
+            public static final int REAR_RIGHT_STEERING_MOTOR = 5;
+            public static final int REAR_RIGHT_STEERING_ENCODER = 6;
+        }
+>>>>>>> 38e796776471ec782b914678799b273f1171ef67
     }
 }
