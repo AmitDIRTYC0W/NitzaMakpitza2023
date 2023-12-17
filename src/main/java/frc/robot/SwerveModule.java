@@ -22,18 +22,27 @@ import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class SwerveModule {
+
+    // Number values
     public int moduleNumber;
     private Rotation2d angleOffset;
     private Rotation2d lastAngle;
 
+    // Motor and encoder values
     private RelativeEncoder mIntegratedAngleEncoder;
-    private SparkMaxPIDController angleController;
     private CANSparkMax mAngleMotor;
     private TalonFX mDriveMotor;
     private CANCoder angleEncoder;
 
-    SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Constants.Swerve.driveKS, Constants.Swerve.driveKV, Constants.Swerve.driveKA);
+    // Speed control variables
+    private SparkMaxPIDController angleController;
+    private SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Constants.Swerve.driveKS, Constants.Swerve.driveKV, Constants.Swerve.driveKA);
 
+    /**
+     * Every module of the swerve needs to be defined, here we define it.
+     * @param moduleNumber Is the number of the module (1 - front left for example)
+     * @param moduleConstants Are the constants needed for module.
+     */
     public SwerveModule(int moduleNumber, SwerveModuleConstants moduleConstants){
         this.moduleNumber = moduleNumber;
         this.angleOffset = moduleConstants.angleOffset;
